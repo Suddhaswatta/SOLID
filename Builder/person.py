@@ -7,8 +7,8 @@ class Person:
         self.position = None
         self.date_of_birth = None
         
-    def __str__(self) -> str:
-        return f'Person {self.name} works as {self.position} '
+    def __str__(self) :
+        return f'Person : {self.name}, works as : {self.position}\nwas born in {self.date_of_birth} '
     
     @staticmethod
     def create():
@@ -23,11 +23,11 @@ class PersonBuilder:
         return self.person
     
     def works_as(self,job):
-        self.person.position = job
+        self.person.position = job.upper()
         return self
     
     def known_as(self,name):
-        self.person.name = name
+        self.person.name = name.upper()
         return self
    
 personA = Person.create()\
