@@ -34,12 +34,15 @@ class JournalRepo:
         file.close()
         
 
-journal = Journal()
+if __name__ == '__main__':
+    
+    journal = Journal()
 
-print(journal.add_entries("I eat "))
-print(journal.add_entries("I sleep "))
-repo = JournalRepo()
-repo.save_to_file("myFies",journal)
+    print(journal.add_entries("I eat "))
+    print(journal.add_entries("I code "))
+    print(journal.add_entries("I sleep "))
+    repo = JournalRepo()
+    repo.save_to_file("myFies",journal)
 
 
 
