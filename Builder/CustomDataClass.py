@@ -9,13 +9,13 @@ class Shape(ABC):
 class Circle(Shape) :
     
     def __init__(self,r: int):
-        self.r = r
+        self.__r = r
     
     def area(self)->float:
-        return math.pi*self.r
+        return math.pi*self.__r
     
     def __repr__(self)->str:
-        return f"Circle {self.r} with hash {self.__hash__()}"
+        return f"Circle {self.__r} with hash {self.__hash__()}"
     
     def __hash__(self)->int:
         return hash(self.area())

@@ -29,39 +29,39 @@ class EmployeeFileRepo(EmployeeRepo):
     def __init__(self,filename):
         
         self.filename = filename
-        self.emps = []
+        self.__emps = []
         
         
     def save_emp(self, emp: Employee):
-        self.emps.append(emp)
+        self.__emps.append(emp)
         with open(self.filename+'.json','w') as file:
-            json_formatted = json.dumps(self.emps ,default=lambda emp:emp.__dict__)
+            json_formatted = json.dumps(self.__emps ,default=lambda emp:emp.__dict__)
             file.write(json_formatted)
         return emp
     
     def find_all(self):
         with open(self.filename+'.json','r') as file:
-            self.emps = json.load(file, object_hook=lambda d: Employee(**d))
-        return self.emps
+            self.__emps = json.load(file, object_hook=lambda d: Employee(**d))
+        return self.__emps
     
     def find_by_id(self, id: int):
-        return filter(lambda x : x.id == id , self.emps) 
+        return filter(lambda x : x.id == id , self.__emps) 
     
 class EmployeeInMemoryRepo(EmployeeRepo):
     
     def __init__(self) -> None:
-        self.employees = []
+        self.__employees = []
         
     def find_all(self):
-        return self.employees
+        return self.__employees
     
     def save_emp(self, emp: Employee):
-        self.employees.append(emp)
+        self.__employees.append(emp)
         return emp
     
     
     def find_by_id(self, id: int):
-        return filter(lambda emp : emp.id == id , self.employees) 
+        return list(filter(lambda emp : emp.id == id , self.__employees))
     
     
 class EmployeeService:
@@ -101,7 +101,7 @@ print(in_mem_serv.save(Employee(1,"Ram",1,2000)))
 print(in_mem_serv.save(Employee(2,"Adam",88,20)))
 print(in_mem_serv.save(Employee(3,"Eve",8,200)))
 print(in_mem_serv.save(Employee(5,"Rhona",18,11100)))
-print(in_mem_serv.find_by_id(5))
+print(f'Filter Employee {in_mem_serv.find_by_id(3)}')
 
 print(in_mem_serv.find_all())
         
