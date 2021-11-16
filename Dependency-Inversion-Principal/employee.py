@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import json
+from typing import List
 
 @dataclass
 class Employee:
@@ -39,7 +40,7 @@ class EmployeeFileRepo(EmployeeRepo):
             file.write(json_formatted)
         return emp
     
-    def find_all(self):
+    def find_all(self)-> List[Employee]:
         with open(self.filename+'.json','r') as file:
             self.__emps = json.load(file, object_hook=lambda d: Employee(**d))
         return self.__emps
